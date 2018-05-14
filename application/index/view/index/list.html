@@ -30,11 +30,10 @@
 				<?php foreach($data as $v){?>
 				<tr>
 					<td><input name="id[]" type="checkbox" value="" /></td>
-					<?php if(isset($v['name'])){ echo "<td>".$v['name']."</td>";}?>
-					<?php if(isset($v['model_name'])){ echo "<td>".$v['model_name']."</td>";}?>
-					<?php if(isset($v['brand_name'])){ echo "<td>".$v['brand_name']."</td>";}?>
 					<?php if(isset($v['sell_date'])){ echo "<td>".$v['sell_date']."</td>";}?>
 					<?php if(isset($v['customer_name'])){ echo "<td>".$v['customer_name']."</td>";}?>
+					<?php if(isset($v['model_name'])){ echo "<td>".$v['model_name']."</td>";}?>
+					<?php if(isset($v['brand_name'])){ echo "<td>".$v['brand_name']."</td>";}?>
 					<?php if(isset($v['mobile'])){ echo "<td>".$v['mobile']."</td>";}?>
 					<?php if(isset($v['last_buy_time'])){ echo "<td>".$v['last_buy_time']."</td>";}?>
 
