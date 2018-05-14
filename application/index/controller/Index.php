@@ -14,26 +14,29 @@ class Index extends Controller
     }
 
     public function index(){
-        $menu = $this->_menu();
-        $this->assign('menu',$menu);
-        $topNav = $this->_topNav();
-        $this->assign('topNav',$topNav);
-        $main_content = $this->_mainContent();
+        $action = $this->param['action'] ?? '';
+        switch ($action) {
+            case 'list':
+                $main_content = $this->list();
+                break;
+            case 'add':
+                $main_content = $this->add();
+                break;
+            default:
+                $main_content = $this->list();
+                break;
+        }
+        
         $this->assign('main_content',$main_content);
-        $main_crumbs = $this->_mainCrumbs();
-        $this->assign('main_crumbs',$main_crumbs);
-        return $this->fetch();
+        return $this->fetch('index');
     }
-    public function _menu(){
-        return $this->fetch('left_menu');
+    public function list(){
+        $this->assign('title','xx管理');
+        return $this->fetch('list');
     }
-    public function _topNav(){
-        return $this->fetch('top_nav');
+    public function add(){
+        return $this->fetch('add');
     }
-    public function _mainContent(){
-        return $this->fetch('main_content');
-    }
-    public function _mainCrumbs(){
-        return $this->fetch('main_crumbs');
-    }
+
+    
 }
