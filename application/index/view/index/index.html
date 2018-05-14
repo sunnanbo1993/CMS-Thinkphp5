@@ -1,64 +1,117 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>商家管理后台</title>
-	<link type="image/x-icon" href="{webroot:favicon.ico}" rel="icon">
-	<script type='text/javascript' src="/static/js/jquery-1.12.4.min.js"></script>
-	<script type='text/javascript' src="/static/js/form.js"></script>
-	<script type='text/javascript' src="/static/js/artTemplate.js"></script>
-	<script type='text/javascript' src="/static/js/validate.js"></script>
-	<script type='text/javascript' src="/static/js/html5.js"></script>
-	<link rel="stylesheet" href="/static/css/admin.css" type="text/css" media="screen" />
-	<script type='text/javascript' src="/static/js/public.js"></script>
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+<title>首页</title>
+<link href="static/css/main.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="static/js/jquery.min.js"></script>
+
+<script type="text/javascript" src="static/js/plugins/spinner/ui.spinner.js"></script>
+<script type="text/javascript" src="static/js/plugins/spinner/jquery.mousewheel.js"></script>
+
+<script type="text/javascript" src="static/js/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="static/js/plugins/charts/excanvas.min.js"></script>
+<script type="text/javascript" src="static/js/plugins/charts/jquery.flot.js"></script>
+<script type="text/javascript" src="static/js/plugins/charts/jquery.flot.orderBars.js"></script>
+<script type="text/javascript" src="static/js/plugins/charts/jquery.flot.pie.js"></script>
+<script type="text/javascript" src="static/js/plugins/charts/jquery.flot.resize.js"></script>
+<script type="text/javascript" src="static/js/plugins/charts/jquery.sparkline.min.js"></script>
+
+<script type="text/javascript" src="static/js/plugins/forms/uniform.js"></script>
+<script type="text/javascript" src="static/js/plugins/forms/jquery.cleditor.js"></script>
+<script type="text/javascript" src="static/js/plugins/forms/jquery.validationEngine-en.js"></script>
+<script type="text/javascript" src="static/js/plugins/forms/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="static/js/plugins/forms/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="static/js/plugins/forms/autogrowtextarea.js"></script>
+<script type="text/javascript" src="static/js/plugins/forms/jquery.maskedinput.min.js"></script>
+<script type="text/javascript" src="static/js/plugins/forms/jquery.dualListBox.js"></script>
+<script type="text/javascript" src="static/js/plugins/forms/jquery.inputlimiter.min.js"></script>
+<script type="text/javascript" src="static/js/plugins/forms/chosen.jquery.min.js"></script>
+
+<script type="text/javascript" src="static/js/plugins/wizard/jquery.form.js"></script>
+<script type="text/javascript" src="static/js/plugins/wizard/jquery.validate.min.js"></script>
+<script type="text/javascript" src="static/js/plugins/wizard/jquery.form.wizard.js"></script>
+
+<script type="text/javascript" src="static/js/plugins/uploader/plupload.js"></script>
+<script type="text/javascript" src="static/js/plugins/uploader/plupload.html5.js"></script>
+<script type="text/javascript" src="static/js/plugins/uploader/plupload.html4.js"></script>
+<script type="text/javascript" src="static/js/plugins/uploader/jquery.plupload.queue.js"></script>
+
+<script type="text/javascript" src="static/js/plugins/tables/datatable.js"></script>
+<script type="text/javascript" src="static/js/plugins/tables/tablesort.min.js"></script>
+<script type="text/javascript" src="static/js/plugins/tables/resizable.min.js"></script>
+
+<script type="text/javascript" src="static/js/plugins/ui/jquery.tipsy.js"></script>
+<script type="text/javascript" src="static/js/plugins/ui/jquery.collapsible.min.js"></script>
+<script type="text/javascript" src="static/js/plugins/ui/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="static/js/plugins/ui/jquery.progress.js"></script>
+<script type="text/javascript" src="static/js/plugins/ui/jquery.timeentry.min.js"></script>
+<script type="text/javascript" src="static/js/plugins/ui/jquery.colorpicker.js"></script>
+<script type="text/javascript" src="static/js/plugins/ui/jquery.jgrowl.js"></script>
+<script type="text/javascript" src="static/js/plugins/ui/jquery.breadcrumbs.js"></script>
+<script type="text/javascript" src="static/js/plugins/ui/jquery.sourcerer.js"></script>
+
+<script type="text/javascript" src="static/js/plugins/calendar.min.js"></script>
+<script type="text/javascript" src="static/js/plugins/elfinder.min.js"></script>
+
+<script type="text/javascript" src="static/js/custom.js"></script>
+
+<script type="text/javascript" src="static/js/charts/chart.js"></script>
+
+<!-- Shared on MafiaShare.net  --><!-- Shared on MafiaShare.net  --></head>
 
 <body>
-	<!--头部 开始-->
-	<header id="header">
-		<hgroup>
-			<h1 class="site_title"></h1>
-			<h2 class="section_title"></h2>
-			<div class="btn_view_site"><a href="{url:/systemseller/logout}">退出登录</a></div>
-		</hgroup>
-	</header>
-	<!--头部 结束-->
 
-	<!--面包屑导航 开始-->
-	<section id="secondary_bar">
-		<div class="user">
-			<p>admin</p>
-		</div>
-	</section>
-	<!--面包屑导航 结束-->
+<!-- Left side content -->
+<div id="leftSide">
+    <div class="logo"><a href="#"><img src="static/images/logo.png" alt="" /></a></div>
+    
+    <div class="sidebarSep mt0"></div>
+    
+    <!-- Search widget -->
+    <form action="" class="sidebarSearch">
+        <input type="text" name="search" placeholder="搜索..." id="ac" />
+        <input type="submit" value="" />
+    </form>
+    
+    <div class="sidebarSep"></div>
 
-	<!--侧边栏菜单 开始-->
-	<aside id="sidebar" class="column">
-		
-		<h3>CMS管理模块</h3>
-		<ul class="toggle">
-			
-			<li class="icn_categories"><a href="javascript:void(0)" onclick="window.location.href='?c=brand'">品牌管理</a></li>
-			<li class="icn_categories"><a href="javascript:void(0)" onclick="window.location.href='?c=mobile'">机型管理</a></li>
-			<li class="icn_categories"><a href="javascript:void(0)" onclick="window.location.href='?c=customer'">客户管理</a></li>
-			<li class="icn_categories"><a href="javascript:void(0)" onclick="window.location.href='?c=integral'">积分管理</a></li>
-			<li class="icn_categories"><a href="javascript:void(0)" onclick="window.location.href='?c=store'">库存管理</a></li>
-			<li class="icn_categories"><a href="javascript:void(0)" onclick="window.location.href='?c=sell'">销售管理</a></li>
-			
-		</ul>
-		
+    <!-- Left navigation -->
+    <?php echo $menu_list_html;?>
+</div>
 
-		<footer>
-			
-		</footer>
-	</aside>
-	<!--侧边栏菜单 结束-->
 
-	<!--主体内容 开始-->
-	<section id="main" class="column">
-		{$main_content ?? ''}
-	</section>
-	<!--主题内容 结束-->
+<!-- Right side -->
+<div id="rightSide">
+
+    <!-- Top fixed navigation -->
+    <?php echo $top_nav_list_html;?>
+    
+    <!-- Responsive header -->
+    <?php echo $resp_list_html;?>
+    
+    <!-- Title area -->
+    
+    <!-- Page statistics and control buttons area -->
+    
+    <div class="line"></div>
+    
+    <!-- Main content wrapper -->
+    <div class="wrapper">
+        <?php echo $content_html;?>
+    </div>
+    
+    <!-- Footer line -->
+    <div id="footer">
+        
+    </div>
+
+</div>
+
+<div class="clear"></div>
+
 </body>
 </html>
