@@ -14,7 +14,8 @@ class Index extends Controller
     }
 
     public function index(){
-        $controller = $this->param['c'] ?? '';
+        $this->param['c'] = $this->param['c'] ?? 'brand';
+        $controller = $this->param['c'];
         switch ($controller) {
             case 'brand':
                 $main_content = $this->brand();
@@ -244,19 +245,19 @@ class Index extends Controller
             [
                 'sell_date' => date('Y-m-d'),
                 'customer_name' => '张三',
-                'mobile_name' => '1111',
+                'model_name' => '1111',
                 'source' => '1',
             ],
             [
                 'sell_date' => date('Y-m-d'),
                 'customer_name' => '李四',
-                'mobile_name' => '1111',
+                'model_name' => '1111',
                 'source' => '1',
             ],
             [
                 'sell_date' => date('Y-m-d'),
                 'customer_name' => '王五',
-                'mobile_name' => '1111',
+                'model_name' => '1111',
                 'source' => '1',
             ]
         ];
