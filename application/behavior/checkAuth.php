@@ -4,6 +4,6 @@ class checkAuth
 {
 	public function run()
 	{
-		echo 1;die;
+		//在这里校验
 	}
 }
