@@ -1,93 +1,98 @@
 <?php
-// +----------------------------------------------------------------------
-// | Description: 角色
-// +----------------------------------------------------------------------
-// | Author: liudongqi <liudongqi@pdmi.cn>
-// +----------------------------------------------------------------------
-
 namespace app\admin\controller;
-
-use \think\Controller;
+use think\Controller;
 use think\Request;
+use think\Url;
 
 class Users extends Controller
 {
 
-    public function index()
+    /**
+     * 添加角色
+     * 创建人 刘东奇
+     * 时间 2018-05-16 16:39:01
+     */
+    public function roleadd()
     {
-        $userModel = model('User');
-        $param = $this->param;
-        $keywords = !empty($param['keywords']) ? $param['keywords']: '';
-        $page = !empty($param['page']) ? $param['page']: '';
-        $limit = !empty($param['limit']) ? $param['limit']: '';
-        $data = $userModel->getDataList($keywords, $page, $limit);
-        return resultArray(['data' => $data]);
-    }
+        parent::userauthHtml(8);
+        $compt = new \app\data\service\competence\CompetenceService();
+        $result = parent::comptList();
 
-    public function read()
+        $this->assign('slist',$result['slist']);
+        $this->assign('volist',$result['volist']);
+        return $this->fetch('add');
+    }
+    /**
+     * 修改角色
+     * 创建人 刘东奇
+     * 时间 2018-05-16 16:39:01
+     */
+    public function roleedit()
     {
-        $userModel = model('User');
-        $param = $this->param;
-        $data = $userModel->getDataById($param['id']);
-        if (!$data) {
-            return resultArray(['error' => $userModel->getError()]);
+        parent::userauthHtml(9);
+        $role = new \app\data\service\role\RoleService();
+        $result = $role->roleRoomEdit();
+        if ($result)
+        {
+            $this->assign('result',$result);
+            //获取权限数据
+            $compt =  parent::comptList();
+            $this->assign('volist',$compt['volist']);
+            $this->assign('slist',$compt['slist']);
+            return $this->fetch('edit');
         }
-        return resultArray(['data' => $data]);
-    }
-
-    public function save()
-    {
-        $userModel = model('User');
-        $param = $this->param;
-        $data = $userModel->createData($param);
-        if (!$data) {
-            return resultArray(['error' => $userModel->getError()]);
+        else
+        {
+            parent::operating(request()->path(),1,'数据不存在');
+            $this->assign('content','没有找到相关数据，请关闭本窗口');
+            return $this->fetch('Public/err');
         }
-        return resultArray(['data' => '添加成功']);
     }
 
-    public function update()
+    /**
+     * 删除角色
+     * 创建人 刘东奇
+     * 时间 2018-05-16 16:39:01
+     */
+    public function roledel()
     {
-        $userModel = model('User');
-        $param = $this->param;
-        $data = $userModel->updateDataById($param, $param['id']);
-        if (!$data) {
-            return resultArray(['error' => $userModel->getError()]);
+        //验证用户权限
+        parent::userauth(10);
+        //判断是否是ajax请求
+        if (request()->isAjax())
+        {
+            if (input('post.post')=='ok')
+            {
+                $id = input('post.id');
+                $id = intval($id);
+                if ($id==1)
+                {
+                    parent::operating(request()->path(),1,'不能删除系统默认角色');
+                    return array('s'=>'不能删除此角色');
+                }
+                $role = new \app\data\service\role\RoleService();
+                $result = $role->roleRoomDel();
+                if ($result)
+                {
+                    parent::operating(request()->path(),0,'删除成功');
+                    return array('s'=>'ok');
+                }
+                else
+                {
+                    parent::operating(request()->path(),1,'数据不存在：'.$id);
+                    return array('s'=>'数据不存在');
+                }
+            }
+            else
+            {
+                parent::operating(request()->path(),1,'非法请求');
+                return array('s'=>'非法请求');
+            }
         }
-        return resultArray(['data' => '编辑成功']);
-    }
-
-    public function delete()
-    {
-        $userModel = model('User');
-        $param = $this->param;
-        $data = $userModel->delDataById($param['id']);
-        if (!$data) {
-            return resultArray(['error' => $userModel->getError()]);
+        else
+        {
+            parent::operating(request()->path(),1,'非法请求');
+            return array('s'=>'非法请求');
         }
-        return resultArray(['data' => '删除成功']);
     }
-
-    public function deletes()
-    {
-        $userModel = model('User');
-        $param = $this->param;
-        $data = $userModel->delDatas($param['ids']);
-        if (!$data) {
-            return resultArray(['error' => $userModel->getError()]);
-        }
-        return resultArray(['data' => '删除成功']);
-    }
-
-    public function enables()
-    {
-        $userModel = model('User');
-        $param = $this->param;
-        $data = $userModel->enableDatas($param['ids'], $param['status']);
-        if (!$data) {
-            return resultArray(['error' => $userModel->getError()]);
-        }
-        return resultArray(['data' => '操作成功']);
-    }
-
 }
