@@ -3,6 +3,7 @@ namespace app\erp\controller;
 
 use \think\Controller;
 use think\Request;
+use base\Result;
 
 class Brand extends Controller
 {
@@ -29,6 +30,9 @@ class Brand extends Controller
     }
     public function addSubmit()
     {
+        $state = -1;
+        $msg = '添加失败';
+        return (new Result($state, $msg))->return();
         $data = [];
         $brand_id = $this->model->insertBrandDataReturnId($data);
         if($brand_id !== 0){

@@ -34,10 +34,18 @@
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+          <div class="layui-input-inline">
+            <select name="brand">
+              <option>请选择品牌</option>
+              <option>vivo</option>
+              <option>oppo</option>
+              <option>iphone</option>
+            </select>
+          </div>
+          <div class="layui-input-inline"><input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input"></div>
+          <div class="layui-input-inline"><button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button></div>
+          
+          
         </form>
       </div>
       <xblock>
@@ -52,13 +60,15 @@
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
             <th>ID</th>
-            <th>用户名</th>
-            <th>性别</th>
-            <th>手机</th>
-            <th>邮箱</th>
-            <th>地址</th>
-            <th>加入时间</th>
+            <th>机型</th>
+            <th>品牌</th>
+            <th>颜色</th>
+            <th>内存</th>
+            <th>进货价格</th>
+            <th>推荐价格</th>
+            <th>添加时间</th>
             <th>状态</th>
+            <th>排序</th>
             <th>操作</th></tr>
         </thead>
         <tbody>
@@ -71,19 +81,15 @@
             <td>男</td>
             <td>13000000000</td>
             <td>admin@mail.com</td>
+            <td>admin@mail.com</td>
             <td>北京市 海淀区</td>
             <td>2017-01-01 11:11:42</td>
+            <td>2017-01-01 11:11:42</td>
             <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+              <span class="layui-btn layui-btn-normal layui-btn-mini">已售</span></td>
             <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                <i class="layui-icon">&#xe601;</i>
-              </a>
               <a title="编辑"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
-              </a>
-              <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                <i class="layui-icon">&#xe631;</i>
               </a>
               <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
@@ -99,19 +105,15 @@
             <td>男</td>
             <td>13000000000</td>
             <td>admin@mail.com</td>
+            <td>admin@mail.com</td>
             <td>北京市 海淀区</td>
             <td>2017-01-01 11:11:42</td>
+            <td>2017-01-01 11:11:42</td>
             <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+              <span class="layui-btn layui-btn-normal layui-btn-mini">待售</span></td>
             <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                <i class="layui-icon">&#xe601;</i>
-              </a>
               <a title="编辑"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
-              </a>
-              <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                <i class="layui-icon">&#xe631;</i>
               </a>
               <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
