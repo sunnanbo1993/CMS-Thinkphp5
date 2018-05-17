@@ -62,7 +62,7 @@ class Models{
 	{
 		$return = [];
 		$field  = [
-			'id', 'brand_name as name'
+			'id', 'models_name as name'
 		];
 		$return = Db::table('y_models')->field($field)->select();
 		foreach ($return as $key => $value) {

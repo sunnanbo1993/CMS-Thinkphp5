@@ -23,19 +23,19 @@
   <body>
     <div class="x-body">
         <form class="layui-form">
+
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>品牌
-              </label>
+              <label for="brand" class="layui-form-label"><span class="x-red">*</span>品牌</label>
               <div class="layui-input-inline">
-                  <select id="brand" name="brand" class="valid">
-                    <option value="0">请选择品牌</option>
-                    {volist name="brand_list" id="vo"}
-                      <option value="{$vo.id}">{$vo.name}</option>
-                    {/volist}
-                  </select>
+                <select name="brand" lay-verify="required" lay-search>
+                  <option value="" required="">请选择...</option>
+                  {volist name="brand_list" id="vo"}
+                    <option value="{$vo.id}">{$vo.name}</option>
+                  {/volist}
+                </select>
               </div>
           </div>
+
           <div class="layui-form-item">
               <label for="name" class="layui-form-label">
                   <span class="x-red">*</span>机型
@@ -50,10 +50,8 @@
                   <span class="x-red">*</span>状态
               </label>
               <div class="layui-input-inline">
-                  <select id="state" name="state" class="valid">
-                    <option value="1">在售</option>
-                    <option value="0">停产</option>
-                  </select>
+                  <input type="radio" name="state" value="1" title="在售" checked>
+                  <input type="radio" name="state" value="0" title="停产">
               </div>
           </div>
           <div class="layui-form-item">
@@ -63,8 +61,8 @@
               <div class="layui-input-inline">
                   <input type="text" id="color" name="color" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
-                  <span class="x-red">(规格与规格直接用逗号隔开,例:红色,黄色,蓝色)</span>
               </div>
+              <div class="layui-form-mid layui-word-aux">(规格与规格直接用逗号隔开,例:红色,黄色,蓝色)</div>
           </div>
           <div class="layui-form-item">
               <label for="memory" class="layui-form-label">
@@ -73,8 +71,8 @@
               <div class="layui-input-inline">
                   <input type="text" id="memory" name="memory" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
-                  <span class="x-red">(规格与规格直接用逗号隔开,例:256,16,64)</span>
               </div>
+              <div class="layui-form-mid layui-word-aux"><span class="x-red">(规格与规格直接用逗号隔开,例:256,16,64)</span></div>
           </div>
           <div class="layui-form-item">
               <label for="sort" class="layui-form-label">
@@ -110,7 +108,7 @@
         
           //自定义验证规则
           form.verify({
-            nikename: function(value){
+            brand: function(value){
               if(value.length < 5){
                 return '昵称至少得5个字符啊';
               }
