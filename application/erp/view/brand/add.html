@@ -91,9 +91,10 @@
               type: 'POST',
               data: data.field
             }).done(function(json){
-              console.log(json.code);
+              console.log(json);
               if(json.code === 1){
                   layer.alert(json.msg, {icon: 6},function () {
+                    window.parent.location.reload();
                     // 获得frame索引
                     var index = parent.layer.getFrameIndex(window.name);
                     //关闭当前frame

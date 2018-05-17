@@ -18,6 +18,7 @@ class Brand extends Controller
     public function index()
     {
         $list = $this->model->getBrandListData();
+        $this->assign('list', $list);
         return $this->fetch();
     }
     public function detail()
@@ -32,18 +33,27 @@ class Brand extends Controller
     {
         $state = -1;
         $msg = '添加失败';
-        return (new Result($state, $msg))->return();
-        $data = [];
+        $number = create_guid();
+
+        $data = [
+            'number'      => $number,
+            'brand_name'  => $this->param['name'],
+            'brand_state' => $this->param['state'],
+            'brand_sort'  => $this->param['sort'],
+            'brand_desc'  => $this->param['desc'],
+        ];
         $brand_id = $this->model->insertBrandDataReturnId($data);
         if($brand_id !== 0){
-            return 1;
-        }else{
-            return 0;
+            $state = 1;
+            $msg   = '添加成功';
         }
+        return (new Result($state, $msg))->return();
     }
     public function edit()
     {
-        $info = $this->model->getBrandInfoDataById();
+        $info = $this->model->getBrandInfoDataById($this->param['id']);
+        $this->assign('info', $info);
+        return $this->fetch();
     }
     public function editSubmit()
     {
