@@ -1,6 +1,7 @@
 <?php 
 namespace app\behavior;
 
+use think\Request;
 use app\data\service\BaseService as BaseService;
 /**
  * 管理员登录状态
@@ -13,14 +14,14 @@ class checkAuth
 	private $controller;
 	private $action;
 	private $no_login_url = [
-		'login/index/index',
-		'login/index/login'
+		'/login/index/index',
+		'/login/index/login'
 	];
 	public function __construct()
 	{
-		$this->module     = request()->module() ?? '';
-		$this->controller = request()->controller() ?? 'index';
-		$this->action     = request()->action() ?? 'index';
+		list($this->module, $this->controller, $this->action) = Request::instance()->dispatch()['module'] ?? array("index", "index", "index");
+		$this->controller = $this->controller ?? 'index';
+		$this->action     = $this->action     ?? 'index';
 	}
 	/**
 	 * 管理员登录状态
@@ -56,7 +57,7 @@ class checkAuth
 	public function isLogin()
 	{
 		$token = '我瞎写的，就是用来记录是否登录的';
-		if(!$token){
+		if($token){
 			jsAlerts('请先登录');
 		}
 	}

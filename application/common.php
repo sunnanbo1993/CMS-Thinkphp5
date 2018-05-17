@@ -17,6 +17,8 @@
  */
 function jsAlerts(string $msg = 'error', int $icon = 5, string $url='/login'){
 	echo "<script type='text/javascript' src='/static/lib/layui/layui.js' charset='utf-8'></script>";
+	echo "<script type='text/javascript' src='/static/lib/layui/lay/modules/jquery.js' charset='utf-8'></script>";
+	echo "<script type='text/javascript' src='/static/lib/layui/lay/modules/layer.js' charset='utf-8'></script>";
 	echo "<script>";
 	echo "layui.use(['layer'], function(){
           	var layer = layui.layer;
@@ -25,4 +27,5 @@ function jsAlerts(string $msg = 'error', int $icon = 5, string $url='/login'){
         	});
     	});";
     echo "</script>";
+    exit();
 }
