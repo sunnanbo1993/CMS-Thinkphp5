@@ -36,7 +36,7 @@ class Index extends Controller
             $login = array();
             $Base = new BaseService();
             //验证
-            $type = 'username|password|code';
+            $type = 'username|password';
             $info = input('request.username')."|".input('request.password');
             $check = $Base->checkInfo($type, $info);
 
@@ -71,8 +71,8 @@ class Index extends Controller
 
     /**
      * 退出登录
-     * 创建人 韦丽明
-     * 时间 2017-09-06 21:15:11
+     * 创建人 刘东奇
+     * 时间 2018-05-16 16:10:01
      */
     public function quit()
     {

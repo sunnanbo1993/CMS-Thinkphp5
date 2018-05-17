@@ -31,8 +31,8 @@ class BaseService
 	
 	/**
 	* 初始化数据
-	* 创建人 韦丽明
-	* 更新时间 2017-07-12 13:45:30
+	* 创建人 刘东奇
+	* 更新时间 2018-05-16 16:10:01
 	*/
 	public function init()
 	{
@@ -46,8 +46,8 @@ class BaseService
 	
 	/**
 	* 判断管理员登录状态
-	* 创建人 韦丽明
-	* 更新时间 2017-09-07 15:26:33
+	* 创建人 刘东奇
+	* 更新时间 2018-05-16 16:10:01
 	*/
 	public function checkAdminSession()
 	{
@@ -85,8 +85,8 @@ class BaseService
 	
     /**
      * 信息验证 
-	 * 创建人 韦丽明
-	 * 时间 2017-09-06 21:15:11
+	 * 创建人 刘东奇
+	 * 时间 2018-05-16 16:10:01
      */
 	public function checkInfo($type, $info)
 	{
@@ -114,21 +114,21 @@ class BaseService
 						return '请输入6位数以上的密码';
 					}				
 				break;
-				//验证码
-				case 'code';
-					if (!captcha_check($str[$key])) 
-					{
-						return '请输入正确的验证码';					
-					}			
-				break;
+//				//验证码
+//				case 'code';
+//					if (!captcha_check($str[$key]))
+//					{
+//						return '请输入正确的验证码';
+//					}
+//				break;
 			}
 		}
 	}
 	
     /**
      * 地理位置信息获取 
-	 * 创建人 韦丽明
-	 * 时间 2017-09-06 21:33:05
+	 * 创建人 刘东奇
+	 * 时间 2018-05-16 16:10:01
      */
 	public function area() 
 	{
@@ -141,8 +141,8 @@ class BaseService
 	
     /**
      * 验证IP 
-	 * 创建人 韦丽明
-	 * 时间 2017-09-06 21:47:12
+	 * 创建人 刘东奇
+	 * 时间 2018-05-16 16:10:01
      */
 	public function checkIp($resip, $area) 
 	{
@@ -166,29 +166,10 @@ class BaseService
 			}
 		}
 	}
-
-    /**
-     * 登录日志记录 
-	 * 创建人 韦丽明
-	 * 时间 2017-09-06 21:47:12
-     */	
-	public function loginlog($uid,$username,$description,$area,$cip) 
-	{
-	    //登录日志记录
-	    $hlog['Uid'] = $uid;
-	    $hlog['User'] = $username;
-	    $hlog['Description'] = $description;
-	    $hlog['Area'] = $area;
-	    $hlog['Loginip'] = $cip;
-	    $hlog['Dtime'] = date('Y-m-d H:i:s');
-	    $log = new \app\data\service\index\LoginlogService();
-		$log->loginlogAdd($hlog);
-	}
-	
     /**
      * 加密方式 
-	 * 创建人 韦丽明
-	 * 时间 2017-09-06 22:12:05
+	 * 创建人 刘东奇
+	 * 时间 2018-05-16 16:10:01
      */	
 	public function HashPassword($password) 
 	{
@@ -198,8 +179,8 @@ class BaseService
 	
     /**
      * session封装更新 
-	 * 创建人 韦丽明
-	 * 时间 2017-09-07 11:39:06
+	 * 创建人 刘东奇
+	 * 时间 2018-05-16 16:10:01
      */	
 	public function sessionPack($name, $data) 
 	{
@@ -208,8 +189,8 @@ class BaseService
 	
     /**
      * session读取
-	 * 创建人 韦丽明
-	 * 时间 2017-09-07 11:47:15
+	 * 创建人 刘东奇
+	 * 时间 2018-05-16 16:10:01
      */	
 	public function sessionGets($name) 
 	{
@@ -218,8 +199,8 @@ class BaseService
 	
     /**
      * 用户权限验证
-	 * 创建人 韦丽明
-	 * 时间 2017-09-10 20:28:01
+	 * 创建人 刘东奇
+	 * 时间 2018-05-16 16:10:01
      */
 	 public function userauthHtml($auth) {
 		//当前用户权限获取
@@ -229,151 +210,14 @@ class BaseService
 			return false;
 		}
 	 }
-	 
-    /**
-     * 上传图片
-	 * 创建人 韦丽明
-	 * 时间 2017-09-10 21:26:02
-     */	 
-	public function upload($name='', $file = "attach_file", $type=0, $w=350 ,$h=350)
-	{		
-	    // 获取表单上传文件 例如上传了001.jpg
-	    $file = request()->file($file);
-	    // 移动到框架应用根目录/public/uploads/ 目录下
-	    $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads'. DS . $name);
-		
-	    if($info)
-		{
-			$info = '/uploads/'.$name.'/'.$info->getSaveName();
-	         //生成缩略图
-			 if ($type===2) 
-			 {				 
-				$thumb = $this->thumbImg($info, $name, $type, $w, $h); 
-			 }	 
-	    }
-		else
-		{
-	        // 上传失败获取错误信息 /uploads/goods/
-	        //echo $file->getError();
-	    }
-		
-		if($type===2)
-		{			
-			$pic = array('info'=>$info,'thumb'=>$thumb);
-			unset($thumb);
-			return $pic;
-		}
-		else
-		{
-			return $info;
-		}	    
-	}
-	
-    /**
-     * 图片压缩
-	 * 创建人 韦丽明
-	 * 时间 2017-09-10 21:27:55
-     */	
-	public function thumbImg($img, $name, $type ,$w=375 ,$h=286, $goods='')
-	{
-		
-		$img = './'.$img;
-		// 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.jpg
-		$riqi = date("Y-m-d",time());
-		$i = rand(0,1000000000);		
-		$g_id = time() ;
-		
-		if ($type==1) 
-		{
-			$name = './uploads/thumb/'.$name.'/item'.$g_id.".jpg";
-		} 
-		else if ($type==2) 
-		{				
-			$url = './uploads/thumb/'.$name;			
-			@mkdir('./uploads/thumb/',777,true);
-			@mkdir($url,777,true);
-			@chmod($url, 0777);
-				
-			$path = $url ;
-			if (!file_exists($path)){
-				define($path, __DIR__);
-				mkdir($path); 
-			}
-				
-			$path2 = $url.'/'.$riqi;
-			@mkdir($path2,777,true);
-			@chmod($path2, 0777);				
-			if (!file_exists($path2)) {
-				mkdir($path2); 
-			}				
-			$name = $path2.'/'.$name.$g_id.$i.".jpg";
-		}
-
-		if (file_exists($img)) 
-		{
-			if (!file_exists($name)) 
-			{	
-				$image = \think\Image::open($img);				
-				//dump($name);die;
-				$image->thumb($w, $h,\think\Image::THUMB_CENTER)->save($name,'jpg');
-			}
-			$name = substr($name,1);
-			$pic = $name ;
-			return $pic;		
-		}
-	 }
-
-    /**
-     * 删除图片
-	 * 创建人 韦丽明
-	 * 时间 2017-09-10 21:27:55
-     */
-	public function unlikFile($imgUrl='', $type=0)
-	{
-		//判读图片是否存在
-		if(!$type)
-		{
-			$fileDel = ROOT_PATH.'public'.$imgUrl;
-		}
-		else
-		{
-			$fileDel = $imgUrl;
-		}
-		
-		if(file_exists($fileDel))
-		{
-			unlink($fileDel);
-			return true;
-		}
-		else
-		{
-			return false;
-		}		
-	}
-	
-    /**
-     * 删除原图片
-	 * 创建人 韦丽明
-	 * 时间 2017-09-11 21:19:04
-     */
-	public function DelImg($img) 
-	{
-		$primary_file = '';
-		$primary_file = $img;
-		if(!empty($primary_file))
-		{
-			$imgUrl = $primary_file;
-			$unlink = $this->unlikFile($imgUrl);
-		}
-	}
     /**
      * 合并数组
 	 * @param string $cache 缓存 默认值为空
 	 * @param array $data 合并数组
 	 * @param array $lable 默认数组
 	 * @param array $arr 传参数组
-	 * 创建人 韦丽明
-	 * 时间 2017-09-06 22:28:13
+	 * 创建人 刘东奇
+	 * 时间 2018-05-16 16:10:01
      */
 	public function mergeArray($arr=array())
 	{
