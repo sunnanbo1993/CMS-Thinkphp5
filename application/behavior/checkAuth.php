@@ -1,27 +1,65 @@
 <?php 
 namespace app\behavior;
-use think\Controller;
-use think\Request;
-use think\Url;
-use think\Session;
-use think\Config;
-use think\Cache;
 
 use app\data\service\BaseService as BaseService;
+/**
+ * 管理员登录状态
+ * 创建人 刘东奇
+ * 更新时间 2018-05-16 16:02:15
+ */
 class checkAuth
 {
+	private $module;
+	private $controller;
+	private $action;
+	private $no_login_url = [
+		'login/index/index',
+		'login/index/login'
+	];
+	public function __construct()
+	{
+		$this->module     = request()->module() ?? '';
+		$this->controller = request()->controller() ?? 'index';
+		$this->action     = request()->action() ?? 'index';
+	}
+	/**
+	 * 管理员登录状态
+	 * 创建人 刘东奇
+	 * 更新时间 2018-05-16 16:02:15
+	 */
 	public function run()
 	{
-		/**
-		 * 管理员登录状态
-		 * 创建人 刘东奇
-		 * 更新时间 2018-05-16 16:02:15
-		 */
-		$Base = new BaseService();
-		$result = $Base->checkAdminSession();
-		return $result;
+		
+		if($this->isCheckLogin()){
+			$this->isLogin();
+		}
 	}
-
+	/**
+	 * 管理员登录状态
+	 * 创建人 刘东奇
+	 * 更新时间 2018-05-16 16:02:15
+	 */
+	public function isCheckLogin()
+	{
+		$reponse = true;
+		$url = '/'.$this->module.'/'.$this->controller.'/'.$this->action;
+		if(in_array($url, $this->no_login_url)){
+			$reponse = false;
+		}
+		return $reponse;
+	}
+	/**
+	 * 管理员登录状态
+	 * 创建人 刘东奇
+	 * 更新时间 2018-05-16 16:02:15
+	 */
+	public function isLogin()
+	{
+		$token = '我瞎写的，就是用来记录是否登录的';
+		if(!$token){
+			jsAlerts('请先登录');
+		}
+	}
 //	/**
 //	 * 用户权限验证1(ajax发送返回验证)
 //	 * 创建人 刘东奇
