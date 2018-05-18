@@ -31,13 +31,13 @@ class BaseService
 	
 	/**
 	* 初始化数据
-	* 创建人 韦丽明
+	* 创建人 刘东奇
 	* 更新时间 2017-07-12 13:45:30
 	*/
 	public function init()
 	{
 		//管理员信息
-		$this->uadmin = Session::get('ThinkUser');		
+		$this->uadmin = Session::get('ThinkUser');
 		//验证码
 		//$this->verify = Session::get('verify');
 		//缓存时间
@@ -85,8 +85,8 @@ class BaseService
 	
     /**
      * 信息验证 
-	 * 创建人 韦丽明
-	 * 时间 2017-09-06 21:15:11
+	 * 创建人 刘东奇
+	 * 时间 2018-05-18 21:15:11
      */
 	public function checkInfo($type, $info)
 	{
@@ -102,7 +102,7 @@ class BaseService
 			{
 				//用户名
 				case 'username';
-					if (!preg_match('/^[\x{4e00}-\x{9fa5}a-zA-Z0-9_-]{2,16}$/u',$str[$key])) 
+					if (!preg_match('/^[\x{4e00}-\x{9fa5}a-zA-Z0-9_-]{2,16}$/u',$str[$key]))
 					{
 						return '请输入合法的用户名';
 					}
@@ -113,13 +113,6 @@ class BaseService
 					{				
 						return '请输入6位数以上的密码';
 					}				
-				break;
-				//验证码
-				case 'code';
-					if (!captcha_check($str[$key])) 
-					{
-						return '请输入正确的验证码';					
-					}			
 				break;
 			}
 		}

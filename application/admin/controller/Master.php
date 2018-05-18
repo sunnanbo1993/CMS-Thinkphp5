@@ -3,6 +3,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use think\Url;
+use \think\Hook;
 
 class Master extends Controller
 {
@@ -13,22 +14,22 @@ class Master extends Controller
     */
     public function index()
     {
-        parent::userauthHtml(2);
-        $keyword = input('request.keyword');
-        $user = new \app\data\service\user\UserService();
-        $type = 1 ;
-        $lists  = $user->userListShow($type);
-        $volist = $lists->toArray();
-        $role = new \app\data\service\role\RoleService();
-
-        foreach($volist['data'] as $k=>$v)
-        {
-            $roleIfon = $role->roleRoomEditDoo("ID='{$v['Roleid']}'", 'Rolename');
-            $volist['data'][$k]['Rolename'] = $roleIfon['Rolename'];
-        }
-        $this->assign('volist',$volist);
-        $this->assign('keyword',$keyword);
-        $this->assign('lists',$lists);
+        Hook::listen('userauthHtml');
+//        $keyword = input('request.keyword');
+//        $user = new \app\data\service\user\UserService();
+//        $type = 1 ;
+//        $lists  = $user->userListShow($type);
+//        $volist = $lists->toArray();
+//        $role = new \app\data\service\role\RoleService();
+//
+//        foreach($volist['data'] as $k=>$v)
+//        {
+//            $roleIfon = $role->roleRoomEditDoo("ID='{$v['Roleid']}'", 'Rolename');
+//            $volist['data'][$k]['Rolename'] = $roleIfon['Rolename'];
+//        }
+//        $this->assign('volist',$volist);
+//        $this->assign('keyword',$keyword);
+//        $this->assign('lists',$lists);
         return $this->fetch();
     }
 

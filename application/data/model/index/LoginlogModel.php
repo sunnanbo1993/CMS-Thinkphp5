@@ -14,6 +14,6 @@ use app\data\model\BaseModel as BaseModel;
 
 class LoginlogModel extends BaseModel
 {	
-  protected $db = 'loginlog' ;//登录日志表
+  protected $db = 'y_loginlog' ;//登录日志表
 	
 }

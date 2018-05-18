@@ -4,6 +4,7 @@ namespace app\login\controller;
 use think\Controller;
 use think\Request;
 use think\Url;
+use base\Result;
 use app\data\service\BaseService as BaseService;
 
 class Index extends Controller
@@ -31,42 +32,30 @@ class Index extends Controller
      */
     public function login()
     {
-        if (request()->isAjax())
-        {
             $login = array();
             $Base = new BaseService();
             //验证
             $type = 'username|password';
             $info = input('request.username')."|".input('request.password');
             $check = $Base->checkInfo($type, $info);
-
             if($check)
             {
-                return json(['s'=>$check]);
+                $state = 2;
+               return  json(['code' => $state, 'msg' => $check]);
             }
-
             //地理位置信息获取
             $area = $Base->area();
-            //自动验证IP
-            $dip = new \app\data\service\ip\IpService();
-            $whereIP['Ip'] = $area['ip'];
-            $resip = $dip->ipInfo($whereIP);
-
-            $checkIp = $Base->checkIp($resip, $area);
-            if($checkIp)
-            {
-                return json(['s'=>$checkIp]);
-            }
             //账号信息判断
             $user = new \app\data\service\user\UserService();
-
             $username = input('request.username');
             $password = input('request.password');
             $ruesult = $user->adminLogin($username, $password, $area);
-            return json(['s'=>$ruesult]);
-        }else {
-            return json(['s'=>'非法请求']);
-        }
+            if($ruesult=='ok'){
+                $state = 1;
+                $msg = '登陆成功';
+                return json(['code' => $state, 'msg' => $msg]);
+            }
+
     }
 
     /**

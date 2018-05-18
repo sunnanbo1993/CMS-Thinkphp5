@@ -23,9 +23,9 @@
         <div id="darkbannerwrap"></div>
         
         <form method="post" class="layui-form" >
-            <input name="mobile" placeholder="请输入手机号"  type="text" lay-verify="required" class="layui-input" >
+            <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
-            <input name="password" lay-verify="required" placeholder="请输入密码"  type="password" class="layui-input">
+            <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
             <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
@@ -35,43 +35,40 @@
     <script>
         layui.use(['form','layer'], function(){
             $ = layui.jquery;
-          var form = layui.form
-          ,layer = layui.layer;
-        
-          //自定义验证规则
-          form.verify({
-            mobile: [/^(([0-9]\d?)|100)$/, '排序只能为0-100'], //用户名只能为手机号
-          });
-
-          //监听提交
-          form.on('submit(add)', function(data){
-            console.log(data.field);  //获取form表单里的值
-            var url = '/login/index/login';
-            //发异步，把数据提交给php
-            $.ajax({
-              url: url,
-              dataType: 'json',
-              type: 'POST',
-              data: data.field
-            }).done(function(json){
-              console.log(json.code);
-              if(json.code === 1){
-                  layer.alert(json.msg, {icon: 6},function () {
-                    //成功跳转
-                    windows.location.href = '/';
-                  });
-              }else{
-                  layer.alert(json.msg, {icon: 5});
-              }
+            var form = layui.form
+                    ,layer = layui.layer;
+            //监听提交
+            form.on('submit(login)', function(data){;
+                console.log(data.field);
+                var url = '/login/index/login';
+                //发异步，把数据提交给php
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    type: 'POST',
+                    data: data.field
+                }).done(function(json){
+                    console.log(json);
+                    if(json.code === 1){
+                        layer.alert(json.msg, {icon: 6},function () {
+                            window.location.href='/index/index/index';
+//                            window.parent.location.reload();
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                        });
+                    }else{
+                        layer.alert(json.msg, {icon: 5});
+                    }
+                });
+                return false;
             });
-            return false;
-          });
-          
-          
         });
+
     </script>
 
-    
+
     <!-- 底部结束 -->
     <script>
     //百度统计可去掉

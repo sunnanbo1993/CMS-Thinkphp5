@@ -14,6 +14,6 @@ use app\data\model\BaseModel as BaseModel;
 
 class IpModel extends BaseModel
 {	
-  protected $db = 'ip' ;//IP表
+  protected $db = 'y_ip' ;//IP表
 	
 }

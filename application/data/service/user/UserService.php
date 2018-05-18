@@ -22,16 +22,10 @@ class UserService extends BaseService
 	public function __construct()
 	{
 		parent::__construct();
-		
-		//禁止访问user数据库
-		if(!$this->uadmin && false===request()->isAjax())
-		{
-			exit('页面错误！');
-		}
 		$this->cache = 'users';
 		$this->user = new UserModel();
 	}
-	
+
     /**
      * 查询管理员列表
 	 * 创建人 韦丽明
@@ -60,7 +54,7 @@ class UserService extends BaseService
 	 * 时间 2017-07-14 11:40:09
      */
 	public function userCount($where='')
-	{		
+	{
 		$Count =  $this->user->getCount($where);
 		return $Count;
 	}
@@ -131,26 +125,25 @@ class UserService extends BaseService
 	{
 		$lable = array();
 		//合并数组
-		$lable = parent::mergeArray($data);		
+		$lable = parent::mergeArray($data);
 		$where = $lable['where'];
-		$field = $lable['field'];
-		if(empty($lable['order'])){			
+		if(empty($lable['order'])){
 			$order = 'ID desc';
 		}else{
 			$order = $lable['order'];
-		}	
+		}
 		$page  = $lable['page'];
-		$cache = $lable['cache'];		
+		$cache = $lable['cache'];
 		//后台默认不分类缓存
 		if(!$where && $cache===''){
-			$cache = $this->cache; 
-		}		
+			$cache = $this->cache;
+		}
 		//有条件情况下
-		if($where){}		
+		if($where){}
 		$list = $this->user->getPageList($where, $field, $order, $page, $cache);
 		return $list;
 	}
-	
+
 	/**
      * 更新管理员数据
 	 * 创建人 韦丽明
@@ -189,7 +182,7 @@ class UserService extends BaseService
 	 * 创建人 韦丽明
 	 * 时间 2017-09-10 20:10:00
      */
-	public function userListShow($type=0, $field='*', $c_pid=0, $page=15) 
+	public function userListShow($type=0, $field='*', $c_pid=0, $page=15)
 	{
 		$keyword = input('request.keyword');
     	$where = array();
@@ -219,7 +212,7 @@ class UserService extends BaseService
 		}
         return $volist;
 	}
-	
+
 	 /**
      * 按条件添加一条管理员
 	 * 创建人 韦丽明
@@ -491,15 +484,12 @@ class UserService extends BaseService
 			$info['Logintime'] = time();
 			$info['Logincount'] = $info['Logincount']+1;
 			$subordinate_arr = $this->userColumn('leader_id = '.$info['ID'], 'ID');
-			
 			$info['subordinate_id'] = implode(",", $subordinate_arr);
 			parent::sessionPack('ThinkUser',$info);
-			//销毁验证码session
-			parent::sessionPack('verify',null);
 			//缓存时间
 			parent::sessionPack('expire',3600);
 
-			return 'ok';	
+			return 'ok';
 	   }
 	   else
 	   {

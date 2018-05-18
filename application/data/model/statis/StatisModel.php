@@ -14,6 +14,6 @@ use app\data\model\BaseModel as BaseModel;
 
 class StatisModel extends BaseModel
 {	
-  protected $db = 'statis' ;//在线人数统计表
+  protected $db = 'y_statis' ;//在线人数统计表
 	
 }

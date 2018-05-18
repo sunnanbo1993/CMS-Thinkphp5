@@ -3,6 +3,7 @@ namespace app\index\controller;
 
 use \think\Controller;
 use think\Request;
+use \think\Hook;
 class Index extends Controller
 {
     protected $param = [];
@@ -14,7 +15,8 @@ class Index extends Controller
 
     public function index()
     {
-        return $this->fetch();
+       $result = Hook::listen('isCheckLogin');
+        return $result;
     }
     public function welcome()
     {

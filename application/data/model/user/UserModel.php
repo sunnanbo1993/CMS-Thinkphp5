@@ -14,7 +14,7 @@ use app\data\model\BaseModel as BaseModel;
 
 class UserModel extends BaseModel
 {	
-  protected $db = 'user' ;//管理员表
+  protected $db = 'y_master' ;//管理员表
   
 	//自动验证
 	protected $_validate = array(

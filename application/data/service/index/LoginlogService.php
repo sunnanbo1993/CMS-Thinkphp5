@@ -15,7 +15,7 @@ use app\data\service\BaseService as BaseService;
 
 class LoginlogService extends BaseService 
 {
-	protected $cache = 'loginlogs';
+	protected $cache = 'y_loginlog';
 	
 	public function __construct()
 	{
