@@ -2,6 +2,7 @@
 namespace app\behavior;
 
 use think\Request;
+use \think\Controller;
 use app\data\service\BaseService as BaseService;
 /**
  * 管理员登录状态
@@ -41,6 +42,7 @@ class checkAuth
 	public function isCheckLogin()
 	{
 		$arr = [];
+
 		$Base = new BaseService();
 		$response = $Base->checkAdminSession();
 		//var_dump($response);die;
@@ -51,10 +53,8 @@ class checkAuth
 				}
 				if($response=='登录超时'){
 					jsAlerts('登陆超时');
-				}elseif($response=='非法用户登陆'){
+				}if($response=='非法用户登陆'){
 					jsAlerts('非法用户登陆');
-				}else{
-					Alerts('已经登陆');
 				}
 //		}else{
 //			jsAlerts('非法路径');

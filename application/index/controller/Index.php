@@ -17,6 +17,7 @@ class Index extends Controller
     {
         Hook::add('run','app\\behavior\\checkAuth');
         Hook::listen('run');
+        return $this->fetch();
     }
     public function welcome()
     {
