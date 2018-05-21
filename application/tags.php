@@ -15,7 +15,7 @@ return [
     'app_init'     => [],
     // 应用开始
     'app_begin'    => [
-        'app\\behavior\\checkAuth'
+//        'app\\behavior\\checkAuth'
     ],
     // 模块初始化
     'module_init'  => [],

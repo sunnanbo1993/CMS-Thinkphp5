@@ -31,10 +31,7 @@ class checkAuth
 	 */
 	public function run()
 	{
-		
-		if($this->isCheckLogin()){
-			$this->isLogin();
-		}
+		$this->isCheckLogin();
 	}
 	/**
 	 * 管理员登录状态
@@ -43,37 +40,25 @@ class checkAuth
 	 */
 	public function isCheckLogin()
 	{
+		$arr = [];
 		$Base = new BaseService();
 		$response = $Base->checkAdminSession();
 		//var_dump($response);die;
-		$url = '/'.$this->module.'/'.$this->controller.'/'.$this->action;
-		if(in_array($url, $this->no_login_url)){
+//		$url = '/'.$this->module.'/'.$this->controller.'/'.$this->action;
+//		if(in_array($url, $this->no_login_url)){
 				if($response==false){
-					echo 1;
+					jsAlerts('请您登陆');
 				}
 				if($response=='登录超时'){
-					echo 2;
+					jsAlerts('登陆超时');
 				}elseif($response=='非法用户登陆'){
-					echo 3;
+					jsAlerts('非法用户登陆');
 				}else{
-					echo 4;
+					Alerts('已经登陆');
 				}
-		}else{
-			echo 5;
-		}
-	}
-	/**
-	 * 就是用来记录是否登录的
-	 * 创建人 刘东奇
-	 * 更新时间 2018-05-16 16:02:15
-	 */
-	public function isLogin()
-	{
-		$Base = new BaseService();
-		$response = $Base->checkAdminSession();
-		if(count($response)==0){
-			jsAlerts('请先登录');
-		}
+//		}else{
+//			jsAlerts('非法路径');
+//		}
 	}
 	/**
 	 * 用户权限验证1(ajax发送返回验证)

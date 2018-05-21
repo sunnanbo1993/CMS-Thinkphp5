@@ -24,7 +24,6 @@ class Index extends Controller
     {
         return $this->fetch();
     }
-
     /**
      * 管理员登录
      * 创建人 刘东奇
@@ -54,10 +53,12 @@ class Index extends Controller
                 $state = 1;
                 $msg = '登陆成功';
                 return json(['code' => $state, 'msg' => $msg]);
+            }else{
+                $state = 2;
+                $msg = '用户不存在或者登录密码错误！';
+                return json(['code' => $state, 'msg' => $msg]);
             }
-
     }
-
     /**
      * 退出登录
      * 创建人 刘东奇

@@ -15,8 +15,8 @@ class Index extends Controller
 
     public function index()
     {
-       $result = Hook::listen('isCheckLogin');
-        return $result;
+        Hook::add('run','app\\behavior\\checkAuth');
+        Hook::listen('run');
     }
     public function welcome()
     {

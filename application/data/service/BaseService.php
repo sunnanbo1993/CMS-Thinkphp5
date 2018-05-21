@@ -58,7 +58,7 @@ class BaseService
 		}
 		else 
 		{
-			if(($nowtime - $this->uadmin['Logintime']) > $this->expire)
+			if(($nowtime - $this->uadmin['Logintime']) > 2)
 			{
 				$statis = new \app\data\service\statis\StatisService();
 				$where['Uid'] = Session::get('ThinkUser.ID');
