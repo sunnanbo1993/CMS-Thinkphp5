@@ -88,8 +88,9 @@ class checkAuth
 		$result = $Base->userauthHtml($auth);
 		if(false===$result)
 		{
-			$this->assign('content', '抱歉，您没有此操作权限');
-			exit($this->fetch('index/index'));
+			Alerts('抱歉，您没有此操作权限');
+//			$this->assign('content', '抱歉，您没有此操作权限');
+//			exit($this->fetch('index/index'));
 		}
 	}
 }

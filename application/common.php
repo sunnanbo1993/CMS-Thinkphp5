@@ -29,6 +29,25 @@ function jsAlerts( $msg = 'error', $icon = 5, $url='/login/index'){
     echo "</script>";
     exit();
 }
+/**
+ * [jsAlerts js弹窗]
+ * @param  string $msg  [弹窗消息]
+ * @param  int    $icon [弹窗标识，5是哭脸，6是笑脸]
+ */
+function Alerts( $msg = 'error', $icon = 5, $url='/index/index'){
+	echo "<script type='text/javascript' src='/static/lib/layui/layui.js' charset='utf-8'></script>";
+	echo "<script type='text/javascript' src='/static/lib/layui/lay/modules/jquery.js' charset='utf-8'></script>";
+	echo "<script type='text/javascript' src='/static/lib/layui/lay/modules/layer.js' charset='utf-8'></script>";
+	echo "<script>";
+	echo "layui.use(['layer'], function(){
+          	var layer = layui.layer;
+        	layer.alert('".$msg."', {icon: ".$icon."}, function(){
+        		top.location.href='".$url."';
+        	});
+    	});";
+	echo "</script>";
+	exit();
+}
 ///**
 // * [create_guid php官方生成guid]
 // * @param  string $namespace [description]

@@ -53,6 +53,10 @@ class Index extends Controller
                 $state = 1;
                 $msg = '登陆成功';
                 return json(['code' => $state, 'msg' => $msg]);
+            }else if($ruesult=='no'){
+                $state = 3;
+                $msg = '当前账号已被停用';
+                return json(['code' => $state, 'msg' => $msg]);
             }else{
                 $state = 2;
                 $msg = '用户不存在或者登录密码错误！';

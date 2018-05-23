@@ -127,6 +127,7 @@ class UserService extends BaseService
 		//合并数组
 		$lable = parent::mergeArray($data);
 		$where = $lable['where'];
+		$field = $lable['field'];
 		if(empty($lable['order'])){
 			$order = 'ID desc';
 		}else{
@@ -459,10 +460,10 @@ class UserService extends BaseService
 		if($info = $this->userInfo($where,$filed)) 
 		{			
 			//账号状态
-			if($info['Status']<>0) 
+			if($info['Status']==0)
 			{
 				parent::loginlog($info['ID'],$username,'<div class="de2">违规帐号登录</div>',$area['country'].'.'.$area['area'],$area['ip']);
-				return '当前帐号已被封禁，请等待解除～！';
+				return 'no';
 			}
 			
 			//IP管理员位置获取

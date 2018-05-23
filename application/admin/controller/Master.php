@@ -14,22 +14,24 @@ class Master extends Controller
     */
     public function index()
     {
-        Hook::listen('userauthHtml');
-//        $keyword = input('request.keyword');
-//        $user = new \app\data\service\user\UserService();
-//        $type = 1 ;
-//        $lists  = $user->userListShow($type);
-//        $volist = $lists->toArray();
-//        $role = new \app\data\service\role\RoleService();
-//
-//        foreach($volist['data'] as $k=>$v)
-//        {
-//            $roleIfon = $role->roleRoomEditDoo("ID='{$v['Roleid']}'", 'Rolename');
-//            $volist['data'][$k]['Rolename'] = $roleIfon['Rolename'];
-//        }
-//        $this->assign('volist',$volist);
-//        $this->assign('keyword',$keyword);
-//        $this->assign('lists',$lists);
+        $auth = 2;
+        Hook::add('userauthHtml','app\\behavior\\checkAuth');
+        Hook::listen('userauthHtml',$auth);
+        $keyword = input('request.keyword');
+        $user = new \app\data\service\user\UserService();
+        $type = 1 ;
+        $lists  = $user->userListShow($type);
+//对象转数组
+        $volist = $lists->toArray();
+        $role = new \app\data\service\role\RoleService();
+        foreach($volist['data'] as $k=>$v)
+        {
+            $roleIfon = $role->roleRoomEditDoo("ID='{$v['Roleid']}'", 'Rolename');
+            $volist['data'][$k]['Rolename'] = $roleIfon['Rolename'];
+        }
+        $this->assign('volist',$volist);
+        $this->assign('keyword',$keyword);
+        $this->assign('lists',$lists);
         return $this->fetch();
     }
 
@@ -284,4 +286,6 @@ class Master extends Controller
             return array('s'=>'非法请求');
         }
     }
+
+
 }

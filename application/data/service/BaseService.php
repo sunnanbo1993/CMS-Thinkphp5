@@ -216,7 +216,7 @@ class BaseService
      */
 	 public function userauthHtml($auth) {
 		//当前用户权限获取
-		$comp = explode(',',Session::get('ThinkUser.Competence'));		
+		$comp = explode(',',Session::get('ThinkUser.Competence'));
 		array_pop($comp);
 		if (!in_array($auth,$comp)) {
 			return false;

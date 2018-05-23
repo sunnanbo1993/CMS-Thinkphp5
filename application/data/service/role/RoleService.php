@@ -21,7 +21,7 @@ class RoleService extends BaseService
 	{
 		parent::__construct();	
 		$this->role = new RoleModel();
-		$this->cache = 'roles';
+		$this->cache = 'users';
 	}
 	
     /**
